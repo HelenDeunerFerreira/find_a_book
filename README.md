@@ -1,6 +1,7 @@
 # find_a_book
 
-A new Flutter project.
+O user procura uma sugestão de livro para ler e o app randomiza uma automaticamente
+O app também verifica quais bibliotecas existem perto da pessoa, tornando possível que a pessoa leia o tal livro
 
 ## Getting Started
 
