@@ -1,53 +1,92 @@
+import 'package:dio/dio.dart';
+import 'package:find_a_book/repository/model/data.dart';
+import 'package:find_a_book/repository/retrofit/api_client.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'src/locations.dart' as locations;
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  _MyAppState createState() => _MyAppState();
+void main() {
+  runApp(const MyApp());
 }
 
-class _MyAppState extends State<MyApp> {
-  final Map<String, Marker> _markers = {};
-  Future<void> _onMapCreated(GoogleMapController controller) async {
-    final googleOffices = await locations.getGoogleOffices();
-    setState(() {
-      _markers.clear();
-      for (final office in googleOffices.offices) {
-        final marker = Marker(
-          markerId: MarkerId(office.name),
-          position: LatLng(office.lat, office.lng),
-          infoWindow: InfoWindow(
-            title: office.name,
-            snippet: office.address,
-          ),
-        );
-        _markers[office.name] = marker;
-      }
-    });
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Google Office Locations'),
-          backgroundColor: Colors.green[700],
-        ),
-        body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: const CameraPosition(
-            target: LatLng(0, 0),
-            zoom: 2,
-          ),
-          markers: _markers.values.toSet(),
-        ),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text("Flutter - Retrofit Implementation"),
+      ),
+      body: _buildBody(context),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: const Icon(Icons.cancel),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  FutureBuilder<ResponseData> _buildBody(BuildContext context) {
+    final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
+    return FutureBuilder<ResponseData>(
+      future: client.getUsers(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final ResponseData? posts = snapshot.data;
+
+          return posts == null
+              ? const Text("Erro na requisição")
+              : _buildListView(context, posts);
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildListView(BuildContext context, ResponseData posts) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return Card(
+          child: ListTile(
+            leading: const Icon(
+              Icons.account_box,
+              color: Colors.green,
+              size: 50,
+            ),
+            title: Text(
+              posts.data[index]['name'],
+              style: const TextStyle(fontSize: 20),
+            ),
+            subtitle: Text(posts.data[index]['email']),
+          ),
+        );
+      },
+      itemCount: posts.data.length,
     );
   }
 }
