@@ -13,11 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Find a book',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Find a book'),
     );
   }
 }
@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Flutter - Retrofit Implementation"),
+        title: const Text("Livros"),
       ),
       body: _buildBody(context),
       floatingActionButton: FloatingActionButton.extended(
@@ -51,14 +51,15 @@ class _MyHomePageState extends State<MyHomePage> {
   FutureBuilder<ResponseData> _buildBody(BuildContext context) {
     final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
     return FutureBuilder<ResponseData>(
-      future: client.getUsers(),
+      future: client.getBooks(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final ResponseData? posts = snapshot.data;
 
-          return posts == null
-              ? const Text("Erro na requisição")
-              : _buildListView(context, posts);
+          // return posts == null
+          //     ? const Text("Erro na requisição")
+          //     :
+          return _buildListView(context, posts!);
         } else {
           return const Center(
             child: CircularProgressIndicator(),
@@ -79,10 +80,10 @@ class _MyHomePageState extends State<MyHomePage> {
               size: 50,
             ),
             title: Text(
-              posts.data[index]['name'],
+              posts.data[index]['nome'],
               style: const TextStyle(fontSize: 20),
             ),
-            subtitle: Text(posts.data[index]['email']),
+            subtitle: Text(posts.data[index]['autor']),
           ),
         );
       },

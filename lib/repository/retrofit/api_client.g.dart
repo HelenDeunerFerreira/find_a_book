@@ -13,7 +13,7 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://gorest.co.in/public-api/';
+    baseUrl ??= 'https://643dde29c72fda4a0be927b5.mockapi.io/api/v1';
   }
 
   final Dio _dio;
@@ -21,7 +21,7 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<ResponseData> getUsers() async {
+  Future<ResponseData> getBooks() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -34,7 +34,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/users',
+              '/Livros/1',
               queryParameters: queryParameters,
               data: _data,
             )
