@@ -13,7 +13,7 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://643dde29c72fda4a0be927b5.mockapi.io/api/v1';
+    baseUrl ??= 'https://books-flutter-g1.free.mockoapp.net';
   }
 
   final Dio _dio;
@@ -34,7 +34,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/Livros/1',
+              '/books',
               queryParameters: queryParameters,
               data: _data,
             )

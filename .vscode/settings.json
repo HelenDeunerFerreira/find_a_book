@@ -1,4 +1,5 @@
 {
   "java.configuration.updateBuildConfiguration": "interactive",
-  "cmake.configureOnOpen": false
+  "cmake.configureOnOpen": false,
+  "cmake.sourceDirectory": "C:/Users/Helen Deuner/OneDrive/Área de Trabalho/atitus/5° semestre/Tópicos Especiais (Flutter)/find_a_book/linux"
 }

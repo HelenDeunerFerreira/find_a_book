@@ -1,3 +1,3 @@
 class Apis {
-  static const String books = '/Livros/1';
+  static const String books = '/books';
 }

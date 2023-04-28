@@ -32,6 +32,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // @override
+  // initState() {
+  //   super.initState();
+  //   final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
+  //   var livro = client.getBooks();
+  //   client.getBooks();
+  //   print(client.getBooks());
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

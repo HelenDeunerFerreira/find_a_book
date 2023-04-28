@@ -9,7 +9,7 @@ class Apis {
   static const String books = '/Livros/1';
 }
 
-@RestApi(baseUrl: "https://643dde29c72fda4a0be927b5.mockapi.io/api/v1")
+@RestApi(baseUrl: "https://books-flutter-g1.free.mockoapp.net")
 abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
