@@ -6,7 +6,7 @@ import 'package:retrofit/retrofit.dart';
 part 'api_client.g.dart';
 
 class Apis {
-  static const String books = '/Livros/1';
+  static const String books = '/books';
 }
 
 @RestApi(baseUrl: "https://books-flutter-g1.free.mockoapp.net")

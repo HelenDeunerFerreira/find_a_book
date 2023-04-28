@@ -32,6 +32,7 @@ class _MyMapa extends State<MyMapa> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Bibliotecas'),
