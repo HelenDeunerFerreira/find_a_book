@@ -86,7 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
               posts.data[index]['nome'],
               style: const TextStyle(fontSize: 20),
             ),
-            subtitle: Text(posts.data[index]['autor']),
+            subtitle: Text('Autor: ' + posts.data[index]['autor']),
+            trailing: Text('Publicação: ' + posts.data[index]['ano_publi']),
           ),
         );
       },

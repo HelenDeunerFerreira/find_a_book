@@ -42,11 +42,9 @@ class Office {
   Office({
     required this.address,
     required this.id,
-    required this.image,
     required this.lat,
     required this.lng,
     required this.name,
-    required this.phone,
     required this.region,
   });
 
@@ -55,11 +53,9 @@ class Office {
 
   final String address;
   final String id;
-  final String image;
   final double lat;
   final double lng;
   final String name;
-  final String phone;
   final String region;
 }
 
